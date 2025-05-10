@@ -221,7 +221,7 @@ echo
 echo "${GREEN_TEXT}${BOLD_TEXT} ========================== Uploading sample image ========================== ${RESET_FORMAT}"
 echo
 
-wget https://storage.googleapis.com/cloud-training/gsp315/map.jpg 
+wget https://storage.googleapis.com/cloud-training/arc101/travel.jpg
 
 gsutil cp map.jpg gs://$BUCKET
 echo
