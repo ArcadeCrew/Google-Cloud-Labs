@@ -89,7 +89,7 @@ explore: +loan_details {
 #### Steps:
 1. **Select Data:**
    - Use `State` as the dimension.
-   - Use `Count` as the measure.
+   - Use `Outstanding Count` as the measure.
 
 2. **Create Visualization:**
    - Choose a `Bar Chart`.
