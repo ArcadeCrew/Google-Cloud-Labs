@@ -106,7 +106,7 @@ cat > template.json <<EOF_END
 	  "displayName": "structured_data_template"
 	  
 	},
-	"locationId": "global",
+	"locationId": "us",
 	"templateId": "structured_data_template"
   }
 EOF_END
@@ -158,7 +158,7 @@ cat > template.json <<'EOF_END'
     
   },
   "templateId": "unstructured_data_template",
-  "locationId": "global"
+  "locationId": "us"
 }
 EOF_END
 
@@ -175,11 +175,11 @@ https://dlp.googleapis.com/v2/projects/$DEVSHELL_PROJECT_ID/deidentifyTemplates 
 # Output the URLs for the templates
 echo -e "${GREEN_TEXT}${BOLD_TEXT}Structured Data Template URL:${RESET_FORMAT}"
 
-echo -e "${BLUE_TEXT}https://console.cloud.google.com/security/sensitive-data-protection/projects/$DEVSHELL_PROJECT_ID/locations/global/deidentifyTemplates/structured_data_template/edit?project=$DEVSHELL_PROJECT_ID${RESET_FORMAT}"
+echo -e "${BLUE_TEXT}https://console.cloud.google.com/security/sensitive-data-protection/projects/$DEVSHELL_PROJECT_ID/locations/us/deidentifyTemplates/structured_data_template/edit?project=$DEVSHELL_PROJECT_ID${RESET_FORMAT}"
 
 echo -e "${GREEN_TEXT}${BOLD_TEXT}Unstructured Data Template URL:${RESET_FORMAT}"
 
-echo -e "${BLUE_TEXT}https://console.cloud.google.com/security/sensitive-data-protection/projects/$DEVSHELL_PROJECT_ID/locations/global/deidentifyTemplates/unstructured_data_template/edit?project=$DEVSHELL_PROJECT_ID${RESET_FORMAT}"
+echo -e "${BLUE_TEXT}https://console.cloud.google.com/security/sensitive-data-protection/projects/$DEVSHELL_PROJECT_ID/locations/us/deidentifyTemplates/unstructured_data_template/edit?project=$DEVSHELL_PROJECT_ID${RESET_FORMAT}"
 
 # Display the message with colors
 echo -e "${CYAN_TEXT}${BOLD_TEXT}Now follow steps in video.${RESET_FORMAT}"
@@ -214,8 +214,8 @@ cat > job-configuration.json << EOM
             ],
             "transformationDetailsStorageConfig": {},
             "transformationConfig": {
-              "deidentifyTemplate": "projects/$DEVSHELL_PROJECT_ID/locations/global/deidentifyTemplates/unstructured_data_template",
-              "structuredDeidentifyTemplate": "projects/$DEVSHELL_PROJECT_ID/locations/global/deidentifyTemplates/structured_data_template"
+              "deidentifyTemplate": "projects/$DEVSHELL_PROJECT_ID/locations/us/deidentifyTemplates/unstructured_data_template",
+              "structuredDeidentifyTemplate": "projects/$DEVSHELL_PROJECT_ID/locations/us/deidentifyTemplates/structured_data_template"
             },
             "cloudStorageOutput": "gs://$DEVSHELL_PROJECT_ID-output"
           }
@@ -505,7 +505,7 @@ echo -e "${CYAN_TEXT}This step sends the job configuration to the DLP API to cre
 curl -s \
 -H "Authorization: Bearer $(gcloud auth application-default print-access-token)" \
 -H "Content-Type: application/json" \
-https://dlp.googleapis.com/v2/projects/$DEVSHELL_PROJECT_ID/locations/global/jobTriggers \
+https://dlp.googleapis.com/v2/projects/$DEVSHELL_PROJECT_ID/locations/us/jobTriggers \
 -d @job-configuration.json
 
 # Step 3: Wait for job trigger activation
@@ -520,7 +520,7 @@ curl --request POST \
   -H "Accept: application/json" \
   -H "Authorization: Bearer $(gcloud auth print-access-token)" \
   -H "X-Goog-User-Project: $DEVSHELL_PROJECT_ID" \
-  "https://dlp.googleapis.com/v2/projects/$DEVSHELL_PROJECT_ID/locations/global/jobTriggers/dlp_job:activate"
+  "https://dlp.googleapis.com/v2/projects/$DEVSHELL_PROJECT_ID/locations/us/jobTriggers/dlp_job:activate"
 
 echo
 echo "${GREEN_TEXT}${BOLD_TEXT}=======================================================${RESET_FORMAT}"
